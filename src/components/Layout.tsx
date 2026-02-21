@@ -13,7 +13,7 @@ const Layout: React.FC = () => {
             to="/"
             sx={{ color: "white", textDecoration: "none", justifyContent: "center" }}
           >
-            SalesFrame
+            Milos Mirkovic
           </Typography>
         </Toolbar>
       </AppBar>
