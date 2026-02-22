@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await fetch(`https://dummyjson.com/product`);
+      const res = await fetch(`https://dummyjson.com/products?limit=0`); // Fetching all products without limits
       if (!res.ok) {
         throw new Error("Failed to fetch products");
       }
@@ -27,7 +27,7 @@ export const fetchProductById = createAsyncThunk<ProductDetails, number>(
   "products/fetchProductById",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await fetch(`https://dummyjson.com/products/${id}`);
+      const res = await fetch(`https://dummyjson.com/product/${id}`);
       if (!res.ok) {
         throw new Error("Failed to fetch product details");
       }
