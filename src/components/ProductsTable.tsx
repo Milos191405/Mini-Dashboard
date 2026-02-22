@@ -10,6 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { red } from "@mui/material/colors";
 
 interface ProductsTableProps {
   products: Product[];
@@ -19,15 +20,19 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
   const navigate = useNavigate();
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
+    <TableContainer component={Paper} sx={{ overflowX: "auto" }}>
+      <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Category</TableCell>
-            <TableCell>Price</TableCell>
-            <TableCell>Stock</TableCell>
+            <TableCell sx={{ maxWidth: 50 }}>ID</TableCell>
+            <TableCell sx={{maxWidth:50}}>Title</TableCell>
+            <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+              Category
+            </TableCell>
+            <TableCell align="right">Price</TableCell>
+            <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
+              Stock
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -38,11 +43,15 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
               style={{ cursor: "pointer" }}
               onClick={() => navigate(`/items/${product.id}`)}
             >
-              <TableCell>{product.id}</TableCell>
+              <TableCell sx={{ maxWidth: 50 }}>{product.id}</TableCell>
               <TableCell>{product.title}</TableCell>
-              <TableCell>{product.category}</TableCell>
-              <TableCell>${product.price}</TableCell>
-              <TableCell>{product.stock}</TableCell>
+              <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                {product.category}
+              </TableCell>
+              <TableCell align="right">${product.price}</TableCell>
+              <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
+                {product.stock}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
