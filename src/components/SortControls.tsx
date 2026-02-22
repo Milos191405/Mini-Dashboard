@@ -18,7 +18,6 @@ interface SortControlsProps {
 
 const SortControls: React.FC<SortControlsProps> = ({
   sortField,
-  sortOrder,
   onSortFieldChange,
   onSortOrderToggle,
 }) => {

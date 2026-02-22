@@ -12,6 +12,8 @@ export const fetchProducts = createAsyncThunk<Product[]>(
         throw new Error("Failed to fetch products");
       }
       const data = await res.json();
+      // Adding some delay to see loading spinner
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       return data.products;
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : String(error);
@@ -30,6 +32,8 @@ export const fetchProductById = createAsyncThunk<ProductDetails, number>(
         throw new Error("Failed to fetch product details");
       }
       const data = await res.json();
+      // Simulate slower loading to see spinner
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       return data;
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : String(error);
