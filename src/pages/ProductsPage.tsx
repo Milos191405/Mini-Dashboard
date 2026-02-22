@@ -15,24 +15,30 @@ import GreenSpinner from "../components/GreenSpinner";
 const ProductsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // Redux povlaci i cuva podatke sa servera, prati status i greske, 
+  // i ti podaci se posle mogu koristiti u celoj aplikaciji
   const { products, status, error } = useSelector(
     (state: RootState) => state.products,
   );
 
-  //  search and sort
+  //  Pretraga i sortiranje
+  // ovaj state je samo za ovu stranicu, ne treba globalno da se deli i zato nije u reduxu
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [sortField, setSortField] = useState<"price" | "title" | "id">("id");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  // Fetch proizvode samo prvi put (status === 'idle')
+  // Podaci se cache-uju
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchProducts());
     }
   }, [dispatch, status]);
 
-  // Update URL when query changes
+  // Ažuriranje URL-a kada se promeni pretraga
   useEffect(() => {
     if (query.trim()) {
       setSearchParams({ q: query });
@@ -41,7 +47,7 @@ const ProductsPage: React.FC = () => {
     }
   }, [query, setSearchParams]);
 
-  // Filter and sort products
+  // Filtriranje i sortiranje proizvoda - odvojeno u custom hook
   const filteredProducts = useFilteredProducts({
     products,
     query,
@@ -49,12 +55,12 @@ const ProductsPage: React.FC = () => {
     sortOrder,
   });
 
-  //
+  // Vracanje na prvu stranu svaki put kada se promeni pretraga ili sortiranje
   useEffect(() => {
     setCurrentPage(1);
   }, [query, sortField, sortOrder]);
 
-  // Pagination
+  // Pagination ogicava broj prikazanih proizvoda na strani i omogucava navigaciju kroz stranice
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * itemsPerPage,
@@ -99,7 +105,7 @@ const ProductsPage: React.FC = () => {
 
   return (
     <Box>
-      {/* Search & Sort */}
+      {/* Pretraga i sortiranje - UI kontrole */}
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={3}
