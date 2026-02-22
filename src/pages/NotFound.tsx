@@ -10,9 +10,14 @@ const NotFound: React.FC = () => (
     <Typography variant="body1" gutterBottom>
       The page you're looking for doesn't exist.
     </Typography>
-    <Button component={RouterLink} to="/" variant="contained" sx={{ mt: 2 }}>
-      Go home
-    </Button>
+    
+     <Button component={RouterLink} to="/home"
+                variant="outlined"
+                
+                sx={{ mt: 2, color: "green", borderColor: "green" }}
+              >
+                Go Home
+              </Button>
   </Box>
 );
 
