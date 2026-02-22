@@ -10,7 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { red } from "@mui/material/colors";
+
 
 interface ProductsTableProps {
   products: Product[];
