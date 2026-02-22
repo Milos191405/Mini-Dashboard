@@ -1,19 +1,6 @@
-import React from "react";
 import { Box, Pagination } from "@mui/material";
 
-interface PaginationControlsProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
-
-const PaginationControls: React.FC<PaginationControlsProps> = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-}) => {
-  if (totalPages <= 1) return null;
-
+const PaginationControls = ({ currentPage, totalPages, onPageChange }: any) => {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Pagination
@@ -28,7 +15,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
               color: "white",
             },
             "&:hover": {
-              backgroundColor: "rgba(0, 12, 0, 0.1)",
+              backgroundColor: "rgba(0, 128, 0, 0.1)",
             },
           },
         }}

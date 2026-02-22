@@ -34,18 +34,9 @@ const SortControls: React.FC<SortControlsProps> = ({
             onSortFieldChange(e.target.value as "price" | "title" | "id")
           }
           sx={{
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "green !important",
-            },
-            "&:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: "green !important",
-            },
-            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "green !important",
-            },
-            "& .MuiSvgIcon-root": {
-              color: "green",
-            },
+            "& fieldset": { borderColor: "green" },
+            "&:hover fieldset": { borderColor: "green" },
+            "&.Mui-focused fieldset": { borderColor: "green" },
           }}
         >
           <MenuItem value="id">ID</MenuItem>
