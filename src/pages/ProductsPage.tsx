@@ -7,13 +7,8 @@ import { useFilteredProducts } from "../hooks/useFilteredProducts";
 import ProductsTable from "../components/ProductsTable";
 import SearchBar from "../components/SearchBar";
 import SortControls from "../components/SortControls";
-import {
-  CircularProgress,
-  Button,
-  Typography,
-  Box,
-  Stack,
-} from "@mui/material";
+import { Button, Typography, Box, Stack } from "@mui/material";
+import GreenSpinner from "../components/GreenSpinner";
 
 const ProductsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -53,7 +48,7 @@ const ProductsPage: React.FC = () => {
   if (status === "loading") {
     return (
       <Box display="flex" justifyContent="center" mt={5}>
-        <CircularProgress />
+        <GreenSpinner />
       </Box>
     );
   }
@@ -83,7 +78,7 @@ const ProductsPage: React.FC = () => {
 
   return (
     <Box>
-      {/* Search & Sort controls */}
+      {/* Search & Sort */}
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={3}
@@ -108,6 +103,7 @@ const ProductsPage: React.FC = () => {
             setSortField("id");
             setSortOrder("asc");
           }}
+          sx={{ mt: 2, color: "green", borderColor: "green" }}
         >
           Reset
         </Button>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, Paper, Stack } from "@mui/material";
+import { Box, Typography, Button, Paper, Stack, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 
@@ -8,7 +8,7 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   const goToProducts = (q?: string) => {
-    const url = q ? `/products?q=${encodeURIComponent(q)}` : "/products";
+    const url = q ? `/?q=${encodeURIComponent(q)}` : "/";
     navigate(url);
   };
 
@@ -30,6 +30,7 @@ const HomePage: React.FC = () => {
           <SearchBar value={query} onChange={setQuery} />
           <Button
             variant="contained"
+            disabled={!query.trim()}
             sx={{ backgroundColor: "green" }}
             onClick={() => goToProducts(query)}
           >
@@ -37,12 +38,27 @@ const HomePage: React.FC = () => {
           </Button>
           <Button
             variant="outlined"
-            sx={{ color: "green" }}
             onClick={() => goToProducts()}
+            sx={{ mt: 2, color: "green", borderColor: "green" }}
           >
-            View all products
+            View All Products
           </Button>
         </Stack>
+        {!query.trim() && (
+          <Alert
+            severity="info"
+            sx={{
+              mt: 2,
+              backgroundColor: "rgba(0, 128, 0, 0.1)",
+              color: "green",
+              "& .MuiAlert-icon": {
+                color: "green",
+              },
+            }}
+          >
+            Type something to search...
+          </Alert>
+        )}
       </Paper>
     </Box>
   );
