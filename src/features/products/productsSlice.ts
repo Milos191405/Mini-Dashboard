@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await fetch(`https://dummyjson.com/products`);
+      const res = await fetch(`https://dummyjson.com/product`);
       if (!res.ok) {
         throw new Error("Failed to fetch products");
       }
