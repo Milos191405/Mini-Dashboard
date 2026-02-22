@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import React from "react";
+import { Box, Typography, Button } from "@mui/material";
 
 interface ErrorStateProps {
   message: string;
@@ -9,7 +9,11 @@ interface ErrorStateProps {
 const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => (
   <Box textAlign="center" mt={5}>
     <Typography color="error">{message}</Typography>
-    <Button variant="contained" onClick={onRetry} sx={{ mt: 2 }}>
+    <Button
+      variant="contained"
+      onClick={onRetry}
+      sx={{ mt: 2, backgroundColor: "green" }}
+    >
       Retry
     </Button>
   </Box>

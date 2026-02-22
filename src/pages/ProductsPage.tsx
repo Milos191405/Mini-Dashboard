@@ -7,6 +7,8 @@ import { useFilteredProducts } from "../hooks/useFilteredProducts";
 import ProductsTable from "../components/ProductsTable";
 import SearchBar from "../components/SearchBar";
 import SortControls from "../components/SortControls";
+import EmptyState from "../components/EmptyState";
+import PaginationControls from "../components/PaginationControls";
 import { Button, Typography, Box, Stack } from "@mui/material";
 import GreenSpinner from "../components/GreenSpinner";
 
@@ -21,6 +23,8 @@ const ProductsPage: React.FC = () => {
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [sortField, setSortField] = useState<"price" | "title" | "id">("id");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     if (status === "idle") {
@@ -45,6 +49,18 @@ const ProductsPage: React.FC = () => {
     sortOrder,
   });
 
+  //
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query, sortField, sortOrder]);
+
+  // Pagination
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
   if (status === "loading") {
     return (
       <Box display="flex" justifyContent="center" mt={5}>
@@ -60,7 +76,7 @@ const ProductsPage: React.FC = () => {
         <Button
           variant="contained"
           onClick={() => dispatch(fetchProducts())}
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, backgroundColor: "green" }}
         >
           Retry
         </Button>
@@ -68,11 +84,16 @@ const ProductsPage: React.FC = () => {
     );
   }
 
-  if (!filteredProducts.length) {
+  if (!paginatedProducts.length && filteredProducts.length === 0) {
     return (
-      <Box textAlign="center" mt={5}>
-        <Typography>No products match your search.</Typography>
-      </Box>
+      <EmptyState
+        message="No products match your search."
+        onBack={() => {
+          setQuery("");
+          setSortField("id");
+          setSortOrder("asc");
+        }}
+      />
     );
   }
 
@@ -109,7 +130,13 @@ const ProductsPage: React.FC = () => {
         </Button>
       </Stack>
 
-      <ProductsTable products={filteredProducts} />
+      <ProductsTable products={paginatedProducts} />
+
+      <PaginationControls
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </Box>
   );
 };

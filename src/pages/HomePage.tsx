@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
         Mini Dashboard
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-        I used some dummy data
+        Ima sve kao na 'najlonu'
       </Typography>
 
       <Paper sx={{ display: "inline-block", p: 3, mt: 3 }}>
