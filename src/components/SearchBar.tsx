@@ -10,6 +10,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
     <TextField
       size="small"
       placeholder="Search by title"
+      sx={{
+        "& .MuiOutlinedInput-root": {
+          "&:hover fieldset": {
+            borderColor: "green",
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "green",
+          },
+        },
+      }}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />
