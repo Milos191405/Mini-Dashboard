@@ -20,7 +20,6 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
         count={totalPages}
         page={currentPage}
         onChange={(_, page) => onPageChange(page)}
-        color="primary"
         sx={{
           "& .MuiPaginationItem-root": {
             color: "green",
@@ -29,7 +28,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
               color: "white",
             },
             "&:hover": {
-              backgroundColor: "rgba(0, 128, 0, 0.1)",
+              backgroundColor: "rgba(0, 12, 0, 0.1)",
             },
           },
         }}
