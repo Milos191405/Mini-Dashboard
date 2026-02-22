@@ -21,12 +21,15 @@ const ProductDetailsPage: React.FC = () => {
   const productId = Number(id);
   const dispatch = useDispatch<AppDispatch>();
   const { products, selectedProduct, status, error } = useSelector(
-    (state: RootState) => state.products
+    (state: RootState) => state.products,
   );
 
   const productFromList = products.find((p) => p.id === productId);
   const product =
-    productFromList ?? (selectedProduct && selectedProduct.id === productId ? selectedProduct : undefined);
+    productFromList ??
+    (selectedProduct && selectedProduct.id === productId
+      ? selectedProduct
+      : undefined);
 
   const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
@@ -71,7 +74,14 @@ const ProductDetailsPage: React.FC = () => {
   }
 
   return (
-    <Card sx={{ display: "flex", gap: 2, p: 2, flexDirection: { xs: "column", md: "row" } }}>
+    <Card
+      sx={{
+        display: "flex",
+        gap: 2,
+        p: 2,
+        flexDirection: { xs: "column", md: "row" },
+      }}
+    >
       <Box>
         <Box sx={{ width: 300, height: 300, position: "relative" }}>
           {!thumbnailLoaded && (
@@ -92,7 +102,11 @@ const ProductDetailsPage: React.FC = () => {
           )}
           <CardMedia
             component="img"
-            sx={{ width: 300, objectFit: "cover", display: thumbnailLoaded ? "block" : "none" }}
+            sx={{
+              width: 300,
+              objectFit: "cover",
+              display: thumbnailLoaded ? "block" : "none",
+            }}
             image={product.thumbnail}
             alt={product.title}
             onLoad={() => setThumbnailLoaded(true)}
